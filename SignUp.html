@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_green.min.css">
+
+    <!-- Flatpickr 스크립트를 먼저 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
 
 </head>
 <body>
@@ -18,10 +23,26 @@
         
         <label for="password">비밀번호:</label>
         <input type="password" id="password" name="password" required>
-        
+
+        <!-- 생년월일을 입력받을 input의 타입을 date로 변경 -->
+        <label for="birthdate">생년월일:</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+
+        <!-- Flatpickr 초기화 스크립트를 직접 실행 -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                flatpickr('#birthdate', {
+                    dateFormat: 'Y-m-d',
+                    maxDate: 'today',
+                    locale: 'ko',
+                });
+            });
+        </script>
+
         <button type="button" onclick="signup()">가입하기</button>
     </form>
 
+    <!-- 클라이언트 사이드의 JavaScript 파일 추가 -->
     <script src="SignUp_client.js"></script>
 </body>
 </html>

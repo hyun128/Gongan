@@ -3,7 +3,7 @@ const http = require('http');
 const WebSocket = require('ws');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors'); // cors 모듈 추가
+const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
@@ -24,7 +24,7 @@ const User = mongoose.model('User', userSchema);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors()); // cors 미들웨어 추가
+app.use(cors());
 app.use(express.static('public'));
 
 app.get('/styles.css', (req, res) => {
@@ -33,8 +33,8 @@ app.get('/styles.css', (req, res) => {
 
 app.post('/signup', async (req, res) => {
     try {
-        const { username, email, password } = req.body;
-        const newUser = new User({ username, email, password });
+        const { username, email, password, birthdate } = req.body; // birthdate 추가
+        const newUser = new User({ username, email, password, birthdate }); // birthdate 추가
         await newUser.save();
         res.send('회원가입이 완료되었습니다.');
     } catch (error) {
